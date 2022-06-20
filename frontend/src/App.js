@@ -12,6 +12,11 @@ function App() {
   const [currentAccount, setCurrentAccount] = useState(null);
   const [fileUrl, setFileUrl] = useState('')
 
+  const transformUrl = (url) => {
+    let urlArray = url.split("/");
+    return "ipfs://"+urlArray[urlArray.length-1];
+  };
+
 
   const checkWalletIsConnected = async () => {
     const { ethereum } = window;
@@ -51,7 +56,6 @@ function App() {
 
   const mintNftHandler = async () => {
     try {
-      console.log(fileUrl);
       const { ethereum } = window;
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
@@ -59,7 +63,8 @@ function App() {
         const nftContract = new ethers.Contract(CONTRACT_ADDRESS, abi, signer);
 
         console.log("Start minting");
-        let txn = await nftContract.makeAgaveNFT(fileUrl);
+        console.log(transformUrl(fileUrl))
+        let txn = await nftContract.makeAgaveNFT(transformUrl(fileUrl));
         console.log("Minting");
         await txn.wait();
         console.log("Minted");
@@ -101,11 +106,14 @@ function App() {
 
   const mintNftButton = () => {
     return (
-
-      <button onClick={mintNftHandler} className="cta-button mint-nft-button">
-        Mint NFT
-      </button>
-
+      <div>
+        <p>
+          Image was uploaded to {transformUrl(fileUrl)}
+        </p>
+        <button onClick={mintNftHandler} className="cta-button mint-nft-button">
+          Mint NFT
+        </button>
+      </div>
     );
   };
 
