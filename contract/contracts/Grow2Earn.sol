@@ -32,7 +32,7 @@ contract Grow2Earn is ERC721URIStorage {
                     abi.encodePacked(
                         '{"name": "AgaveNFT #', 
                         Strings.toString(tokenId),
-                        '","description": "Agave NFT", "image": ', 
+                        '","description": "Agave NFT", "image": "', 
                         imageURI, 
                         '"}'  
                     )
