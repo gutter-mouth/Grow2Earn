@@ -7,20 +7,25 @@ const main = async () => {
   await nftContract.deployed();
   console.log("Contract deployed to:", nftContract.address);
   let txn;
-  txn = await nftContract.makeAgaveNFT("https://abcdefg");
+  txn = await nftContract.makeAgaveNFT("https://abcdefg", "https://hijkelmn");
   await txn.wait();
   txn = await nftContract.tokenURI(0);
   console.log(txn)
   txn = await nftContract.transferFrom(owner.address, addr1.address, 0);
   await txn.wait();
-  txn = await nftContract.updateTokenURI(0, "hoge");
+  txn = await nftContract.updateTokenURI(0, "hoge", "fuga");
   await txn.wait();
+  txn = await nftContract.tokenURI(0);
+  console.log(txn);
+  txn = await nftContract.getRecord(0);
+  console.log(txn);
+  txn = await nftContract.connect(addr1).switchTokenURI(0,1);
+  console.log(txn);
   txn = await nftContract.tokenURI(0);
   console.log(txn);
   txn = await nftContract.connect(addr1).redeem(0);
   await txn.wait();
-  txn = await nftContract.getRecord(0);
-  console.log(txn);
+  
 };
 
 const runMain = async () => {

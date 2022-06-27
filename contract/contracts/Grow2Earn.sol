@@ -9,31 +9,37 @@ import {Base64} from "./libraries/Base64.sol";
 contract Grow2Earn is ERC721URIStorage {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
-    uint256 maxId = 99;
     address[]  minter;
     bool[] isValid;
     struct Record {
         string imageURI;
+        string animationURI;
         uint256 timestamp;
     }
     mapping(uint256 => Record[]) record;
 
     event NewAgaveNFTMinted(address sender, uint256 tokenId);
+    event TokenURIUpdated(address sender, uint256 tokenId);
+    event TokenURISwitched(address sender, uint256 tokenId, uint256 index);
+    event TokenURIRedeemed(address sender, uint256 tokenId);
 
-    constructor() ERC721 ("SqureNFT", "SQUARE") {
+
+    constructor() ERC721 ("RYUZETSU NFT", "RYUZETSU") {
         console.log("This is my NFT contract.");
     }
 
     // generate tokenURI string from tokenId and imageURI
-    function makeTokenURI(uint256 tokenId, string memory imageURI) private pure returns (string memory) {
+    function makeTokenURI(uint256 tokenId, string memory imageURI, string memory animationURI) private pure returns (string memory) {
         string memory json = Base64.encode(
             bytes(
                 string(
                     abi.encodePacked(
-                        '{"name": "AgaveNFT #', 
+                        '{"name": "RYUZETSU #', 
                         Strings.toString(tokenId),
-                        '","description": "Agave NFT", "image": "', 
+                        '","description": "RYUZETSU NFT", "image": "', 
                         imageURI, 
+                        '", "animation_url": "', 
+                        animationURI, 
                         '"}'  
                     )
                 )
@@ -42,36 +48,43 @@ contract Grow2Earn is ERC721URIStorage {
         return string(abi.encodePacked("data:application/json;base64,", json));
     }
 
-    function makeAgaveNFT(string memory imageURI) public {
-        uint256 newTokenId = _tokenIds.current();
-        require(newTokenId <= maxId, "Over maxId");
-
-        string memory newTokenURI = makeTokenURI(newTokenId, imageURI);
-        _safeMint(msg.sender, newTokenId);
-        _setTokenURI(newTokenId, newTokenURI);
-        record[newTokenId].push(Record(imageURI, block.timestamp));
+    function makeAgaveNFT(string memory imageURI, string memory animationURI) public { // mint a new NFT having metadata with imageURI (image path) and animationURI (3D model path)
+        uint256 newtokenId = _tokenIds.current();
+        string memory newTokenURI = makeTokenURI(newtokenId, imageURI, animationURI);
+        _safeMint(msg.sender, newtokenId);
+        _setTokenURI(newtokenId, newTokenURI);
+        record[newtokenId].push(Record(imageURI, animationURI, block.timestamp));
         minter.push(msg.sender);
         isValid.push(true);
-        console.log("An NFT w/ ID %s has been minted to %s", newTokenId, msg.sender);
+        console.log("An NFT w/ ID %s has been minted to %s", newtokenId, msg.sender);
         _tokenIds.increment();
-        emit NewAgaveNFTMinted(msg.sender, newTokenId);
+        emit NewAgaveNFTMinted(msg.sender, newtokenId);
     }
 
-    function updateTokenURI(uint256 tokenId, string memory imageURI) public {
+    function updateTokenURI(uint256 tokenId, string memory imageURI, string memory animationURI) public { // update metadata and add record
         require(tokenId <= _tokenIds.current()-1, "Over existing tokenId");
         require(msg.sender == minter[tokenId], "Only minter can update metadata");
         require(isValid[tokenId], "Token is invalid");
-        _setTokenURI(tokenId, makeTokenURI(tokenId, imageURI));
-        record[tokenId].push(Record(imageURI, block.timestamp));
+        _setTokenURI(tokenId, makeTokenURI(tokenId, imageURI, animationURI));
+        record[tokenId].push(Record(imageURI, animationURI, block.timestamp));
+        emit TokenURIUpdated(msg.sender, tokenId);
     }
 
-    function redeem(uint256 tokenId) public {
+    function switchTokenURI(uint256 tokenId, uint index) public { // select metadata from existing record
         require(tokenId <= _tokenIds.current()-1, "Over existing tokenId");
-        require(ownerOf(tokenId)!=minter[tokenId], "Redeemed token must be owned by address except for minter");
+        require(index <= record[tokenId].length-1, "Over existing record length");
+        require(msg.sender == ownerOf(tokenId), "Only holder can switch metadata");
         require(isValid[tokenId], "Token is invalid");
+        _setTokenURI(tokenId, makeTokenURI(tokenId, record[tokenId][index].imageURI, record[tokenId][index].animationURI));
+        emit TokenURISwitched(msg.sender, tokenId, index);
+    }
 
-        safeTransferFrom(msg.sender, minter[tokenId], tokenId);
+    function redeem(uint256 tokenId) public { // redeem NFT (make NFT invalid)
+        require(tokenId <= _tokenIds.current()-1, "Over existing tokenId");
+        require(msg.sender == ownerOf(tokenId), "Only owner can redeem");
+        require(isValid[tokenId], "Token is invalid");
         isValid[tokenId] = false;
+        emit TokenURIRedeemed(msg.sender, tokenId);
     }
 
     function getIsValid(uint256 tokenId)public view returns(bool){
@@ -80,10 +93,6 @@ contract Grow2Earn is ERC721URIStorage {
 
     function getCounter() public view returns (uint256) {
         return _tokenIds.current();
-    }
-
-    function getMaxId() public view returns (uint256) {
-        return maxId;
     }
 
     function getRecord(uint256 tokenId) public view returns (Record[] memory){
