@@ -7,7 +7,7 @@ const main = async () => {
   await nftContract.deployed();
   console.log("Contract deployed to:", nftContract.address);
   let txn;
-  txn = await nftContract.makeAgaveNFT("https://abcdefg", "https://hijkelmn");
+  txn = await nftContract.makeAgaveNFT("https://abcdefg", "https://hijkelmn", "agabe", "awesome agave");
   await txn.wait();
   txn = await nftContract.tokenURI(0);
   console.log(txn)
