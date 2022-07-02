@@ -25,7 +25,7 @@ contract Grow2Earn is ERC721URIStorage {
     event TokenURIRedeemed(address sender, uint256 tokenId);
 
     constructor() ERC721("RYUZETSU NFT ALPHA", "RYUZETSU ALPHA") {
-        console.log("This is my NFT contract.");!!
+        console.log("This is my NFT contract.");
     }
 
     // generate tokenURI string from imageURI, animationURI, name, and description
