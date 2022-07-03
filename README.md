@@ -1,5 +1,5 @@
 
-# English
+# README (English)
 ## Project name
 METAPLANTS
 ## About the project
@@ -57,18 +57,13 @@ https://polygonscan.com/address/0x0a9f1360D1166F2669625932532A0e07f7F11201#code
   
 
 ## Challenges faced
+* Repeated trial and error was required to design the NFT service, which can make an impact on the real world. 
+* It was hard to find a way to get a list of token ids from corresponding wallet addresses in the front end.
+* 
+## Presentation slide
+https://speakerdeck.com/player/0e9cb0db35d74318a27b20502159a66f
 
-* List of holding ids for wallet address
-  
-
-
-
-  
-  
-  
-  
-
-# 日本語
+# README (日本語)
 
 ## プロジェクト名
 METAPLANTS
@@ -128,5 +123,5 @@ https://polygonscan.com/address/0x0a9f1360D1166F2669625932532A0e07f7F11201#code
 * フロントエンドからwallet addressに対応する保有idの一覧を取得する方法を見つけるまでに時間を要した
 * 実世界にインパクトを与えられるNFTを実現するためにサービス内容の設計を繰り返し試行錯誤する必要があった
 
-## スライド
-<iframe class="speakerdeck-iframe" frameborder="0" src="https://speakerdeck.com/player/0e9cb0db35d74318a27b20502159a66f" title="metaplants" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" style="border: 0px; background: padding-box padding-box rgba(0, 0, 0, 0.1); margin: 0px; padding: 0px; border-radius: 6px; box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 40px; width: 560px; height: 314px;" data-ratio="1.78343949044586"></iframe>
+## プレゼンテーションスライド
+https://speakerdeck.com/player/0e9cb0db35d74318a27b20502159a66f
