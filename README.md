@@ -52,8 +52,10 @@ As a demonstration environment for showing NFTs on the metaverse, we used oncybe
 Real plants were captured with a smartphone and a 3D model was restored using photogrammetry technology. 
 AGISOFT METASHAPE (https://oakcorp.net/agisoft/) was used as the restoration software.
 
-## Polygonscan link to smart contract (Main net)
-https://polygonscan.com/address/0x0a9f1360D1166F2669625932532A0e07f7F11201#code
+## Polygonscan link to smart contract
+Testnet: https://mumbai.polygonscan.com/address/0x7b261ee52C98d2D68Cb832ae3D8E59867255f6Eb#code
+
+Mainnet: https://polygonscan.com/address/0x0a9f1360D1166F2669625932532A0e07f7F11201#code
   
 
 ## Challenges faced
@@ -114,8 +116,10 @@ NFTの発行者はリアルの植物の成長に合わせてメタデータを�
 実物の植物（アガベ）をスマホで撮影しフォトグラメトリ技術により3次元モデルを復元した。復元ソフトにはAGISOFT METASHAPE（https://oakcorp.net/agisoft/）を使用した。
 
 
-## スマートコントラクトのPolygonscanリンク (Main net)
-https://polygonscan.com/address/0x0a9f1360D1166F2669625932532A0e07f7F11201#code
+## スマートコントラクトのPolygonscanリンク
+Testnet: https://mumbai.polygonscan.com/address/0x7b261ee52C98d2D68Cb832ae3D8E59867255f6Eb#code
+
+Mainnet: https://polygonscan.com/address/0x0a9f1360D1166F2669625932532A0e07f7F11201#code
 
   
 
