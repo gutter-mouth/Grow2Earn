@@ -43,7 +43,6 @@ We developed a UI that allows users to access the following functions from the f
 * mint NFT by specifying local image files and 3D model files
 * update NFT metadata by specifying local image files, 3D model files, and tokenId.
 * view a list of owned NFTs
-//* check the update history of metadata of a specific NFT
 
 ### Metaverse Platform
 As a demonstration environment for showing NFTs on the metaverse, we used oncyber, which allows 3D NFTs to be exhibited.
@@ -110,7 +109,6 @@ NFTの発行者はリアルの植物の成長に合わせてメタデータを�
 * ローカルの画像ファイル、3Dモデルファイルを指定してNFTをミント
 * ローカルの画像ファイル、3Dモデルファイル、tokenIdを指定してNFTのメタデータをアップデート
 * 所持NFTの一覧を閲覧
-// * のNFTのメタデータのアップデート履歴を確認
 
 ### メタバースプラットフォーム
 メタバース上でNFTを鑑賞するためのデモ環境として、3D NFTの展示が可能なoncyberを利用した。
