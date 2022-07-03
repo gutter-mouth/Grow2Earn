@@ -3,8 +3,8 @@
 ## Project name
 METAPLANTS
 ## About the project
-We propose NFT linked one-to-one with real plants.
-Our NFT will grow in the metaverse as real plants grow.  
+We propose NFT linked with real plants.
+Our NFT grow in the metaverse as real plants grow.  
 
 ## Problem we are trying to solve
 We solve three challenges in the existing plant market at once.
